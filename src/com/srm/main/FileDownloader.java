@@ -10,11 +10,17 @@ public class FileDownloader {
 		UtilLogger.logWarning("Warning Logging starts");
 		UtilLogger.simpleLogError("Error logging starts");
 		
-		String urlsample = "https//example.com/file.zip";
-		boolean output;
+		String urlsample = "https://ipv4.download.thinkbroadband.com/5MB.zip";
+		//boolean output;
 		DownloadInitializerImpl DII = new DownloadInitializerImpl();
-		output = DII.validateURL(urlsample);
-		System.out.println(output);
+		try {
+			 DII.validateURL(urlsample);
+		}catch (Exception e) {
+			System.out.println("Main validation Exception" + e);
+			UtilLogger.simpleLogErrorObj(e);			
+		}
+		
+		System.out.println("output is above");
 		
 	}
 
