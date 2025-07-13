@@ -13,7 +13,8 @@ public class UtilLogger {
 	private static final String LOG_FILE_2 = "Error.log";
 	private static final File LOG_PATH_1 = new File(LOG_DIR, LOG_FILE_1);
 	private static final File LOG_PATH_2 = new File(LOG_DIR, LOG_FILE_2);
-	// We are adding static block, since we want to create log files directories before execution of main methos
+	
+	// We are adding static block, since we want to create log files directories before execution of main method
 	static {
 		try {
 			File directory = new File(LOG_DIR);
