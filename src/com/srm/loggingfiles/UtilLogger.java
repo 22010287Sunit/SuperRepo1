@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -22,7 +24,7 @@ public class UtilLogger {
 				directory.mkdirs();
 			}
 			else {
-				System.out.println("Path already exists");
+				//System.out.println("Path already exists");
 			}
 			if(!LOG_PATH_1.exists() && !LOG_PATH_2.exists()) {
 				LOG_PATH_1.createNewFile();
@@ -54,6 +56,27 @@ public class UtilLogger {
 			System.out.println("writeLog Method Exception: " + e);
 		}
 	}
+	// Directly added this writeLog3 code from ChatGPT
+	private static synchronized void writeLog3(String level, Object obj) {
+	    try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOG_PATH_2, true))) {
+	        String timeStamp = LocalDateTime.now().toString();
+	        writer.write("[" + level + "][" + timeStamp + "] ");
+
+	        // Check if obj is an Exception or Throwable
+	        if (obj instanceof Throwable) {
+	            StringWriter sw = new StringWriter();
+	            PrintWriter pw = new PrintWriter(sw);
+	            ((Throwable) obj).printStackTrace(pw);  // This captures full stack trace
+	            writer.write(sw.toString());
+	        } else {
+	            writer.write(obj.toString());
+	        }
+
+	        writer.newLine();
+	    } catch (IOException e) {
+	        System.out.println("writeLog Method Exception: " + e);
+	    }
+	}
 	
 	public static void logInfo(String message) {
         writeLog1("INFO", message);
@@ -69,5 +92,12 @@ public class UtilLogger {
     public static void logWarning(String message) {
         writeLog1("WARNING", message);
     }
+
+	public static void simpleLogErrorObj(Object printStackTrace) {
+		writeLog3("RuntimeError", printStackTrace);
+		
+	}
+
+	
 
 }
