@@ -20,6 +20,8 @@ public class DownloadInitializerImpl implements DownloadInitializer{
 				connection.setRequestMethod("HEAD");
 				connection.setConnectTimeout(5000); // 5 sec to conncetion
 				connection.setReadTimeout(5000); // 5 sec to wait for response
+				System.out.println("Connection Successful");
+				UtilLogger.logInfo("Connection Successful");
 			}catch(Exception e) {
 				UtilLogger.simpleLogError("Connection Catch: " + e);
 				UtilLogger.simpleLogErrorObj(e);
@@ -28,6 +30,8 @@ public class DownloadInitializerImpl implements DownloadInitializer{
 			
 			
 			int responseCode = connection.getResponseCode();
+			System.out.println(responseCode);
+			UtilLogger.logInfo("ResponseCode " + responseCode);
 			
 			// Check if it's valid (200 = OK, 206 = Partial Content)
 			return(responseCode == 200 || responseCode == 206);
@@ -48,6 +52,8 @@ public class DownloadInitializerImpl implements DownloadInitializer{
 	}
 
 	@Override
+	//Connect to a given file URL and return the file size (in bytes) 
+	//— so that the program knows how much to download.
 	public long fetchFileSize(String url) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
