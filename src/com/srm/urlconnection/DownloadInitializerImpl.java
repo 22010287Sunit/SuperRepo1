@@ -55,8 +55,18 @@ public class DownloadInitializerImpl implements DownloadInitializer{
 	//Connect to a given file URL and return the file size (in bytes) 
 	//— so that the program knows how much to download.
 	public long fetchFileSize(String url) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	    URL fileUrl = new URL(url);
+	    HttpURLConnection connection = (HttpURLConnection) fileUrl.openConnection();
+
+	    connection.setRequestMethod("GET");  // HEAD is used to get metadata only, not full file
+	    connection.connect();
+
+	    int responseCode = connection.getResponseCode();
+	    if (responseCode >= 200 && responseCode < 300) {
+	        return connection.getContentLengthLong();  // returns file size in bytes
+	    } else {
+	        throw new IOException("Failed to fetch file size. Response code: " + responseCode);
+	    }
 	}
 
 }

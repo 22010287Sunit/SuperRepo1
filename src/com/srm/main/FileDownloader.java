@@ -10,13 +10,15 @@ public class FileDownloader {
 		//UtilLogger.logWarning("Warning Logging starts");
 		//UtilLogger.simpleLogError("Error logging starts");
 		
-		//String urlsample = "https://download.samplelib.com/";
-		String urlsample = "https://kaido.to";
+		String urlsample = "https://picsum.photos/200/300";
+		//String urlsample = "https://file-examples.com/wp-content/uploads/2017/10/file_example_PNG_500kB.png";
 		//boolean output;
 		DownloadInitializerImpl DII = new DownloadInitializerImpl();
 		try {
 			UtilLogger.logInfo(urlsample);
 			 DII.validateURL(urlsample);
+			 long filesize = DII.fetchFileSize(urlsample);
+			 System.out.println("File size is: "+ filesize);
 		}catch (Exception e) {
 			System.out.println("Main validation Exception" + e);
 			UtilLogger.simpleLogErrorObj(e);			
