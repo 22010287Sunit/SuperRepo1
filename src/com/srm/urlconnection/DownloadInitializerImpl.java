@@ -18,8 +18,8 @@ public class DownloadInitializerImpl implements DownloadInitializer{
 			HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
 			try {
 				connection.setRequestMethod("HEAD");
-				connection.setConnectTimeout(5000); // 5 sec to conncetion
-				connection.setReadTimeout(5000); // 5 sec to wait for response
+				connection.setConnectTimeout(30000); // 30 sec to conncetion
+				connection.setReadTimeout(30000); // 30 sec to wait for response
 				System.out.println("Connection Successful");
 				UtilLogger.logInfo("Connection Successful");
 			}catch(Exception e) {
