@@ -18,3 +18,29 @@ This project demonstrates several Java Core and Advanced concepts:
 - Interface-driven architecture with 5+ modular interfaces
 - Exception handling, I/O Streams, Collections
 - Optional advanced features like thread pooling and logging
+------------------------------------------------------------------------
+
+# Multi-Threaded File Downloader – Logic Flow
+
+```mermaid
+flowchart TD
+    A[Start Application] --> B[Take File URL and Destination Path]
+    B --> C[Open Connection]
+    C --> D{Server Supports Range?}
+    
+    D -- No --> E[Single Thread Download]
+    E --> Z[Merge/Save File]
+    Z --> Y[Download Complete ✅]
+
+    D -- Yes --> F[Get File Size]
+    F --> G[Decide Number of Threads]
+    G --> H[Split File into Byte Ranges]
+    
+    H --> I[For Each Thread]
+    I --> J[Open HTTP Connection with Range Header]
+    J --> K[Download Chunk -> Buffer -> Temp File]
+    K --> L{All Chunks Downloaded?}
+    L -- No --> I
+    L -- Yes --> M[Merge Chunks into Final File]
+    M --> Y[Download Complete ✅]
+
