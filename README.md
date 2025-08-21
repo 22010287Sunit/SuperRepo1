@@ -43,9 +43,11 @@ flowchart TD
     L -- No --> I
     L -- Yes --> M[Merge Chunks into Final File]
     M --> Y[Download Complete ✅]
+```
 
----
+ ---
 
+```mermaid
 sequenceDiagram
     participant C as Client (Downloader)
     participant S as Server
@@ -66,5 +68,4 @@ sequenceDiagram
 
     Note over C: Client merges all chunks into final file
     C-->>S: Download Complete ✅
-
 
